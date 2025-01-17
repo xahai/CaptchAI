@@ -1,0 +1,8 @@
+{
+    "matrix": [false, true, true, true, true, false, false, true, false],
+    "query": "bucket",
+    "groq_match": true,
+    "groq_multi_shoot_match": true,
+    "moondream_match": true,
+    "moondream_multi_shoot_match": true
+}

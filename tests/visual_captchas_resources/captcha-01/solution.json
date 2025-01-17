@@ -1,0 +1,8 @@
+{
+    "matrix": [true, false, false, true, false, true, false, true, true],
+    "query": "hat",
+    "groq_match": true,
+    "moondream_match": false,
+    "groq_multi_shoot_match": false,
+    "moondream_multi_shoot_match": true
+}

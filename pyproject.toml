@@ -1,0 +1,80 @@
+[project]
+name = "captchai"
+version = "0.0.0"
+license = { file = "LICENSE" }
+readme = "README.md"
+description = "Captchai is a python library for solving captchas using AI"
+requires-python = ">=3.12"
+dependencies = [
+    "groq>=0.15.0",
+    "moondream>=0.0.6",
+    "pydantic>=2.10.5",
+    "pydub>=0.25.1",
+]
+keywords = [
+    "captcha",
+    "captcha solver",
+    "captcha solver python",
+    "captcha solver python library",
+]
+
+authors = [
+    { name = "Alejandro Jaramillo", email = "me@alejo.co" },
+    { name = "xAhai", email = "info@xahai.com" },
+    { name = "Alejandro Jaramillo xAhai", email = "alejandro@xahai.co" },
+    { name = "Alejandro Jaramillo LaProp", email = "alejandro.jaramillo@laprop.co" },
+    { name = "Alejandro Jaramillo TBLabs", email = "alejandro.jaramillo@tblabs.co" },
+]
+
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.3.4",
+    "python-dotenv>=1.0.1",
+]
+
+
+
+[tool.uv]
+package = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["captchai"]
+
+[tool.ruff]
+fix = true
+show-fixes = true
+target-version = "py311"
+line-length = 88
+output-format = "grouped"
+
+
+[tool.ruff.lint]
+task-tags = ["TODO", "HACK", "FIXME", "XXX"]
+select = ["E", "F", "N", "W", "C90", "I"]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+lines-after-imports = 2
+lines-between-types = 1
+combine-as-imports = true
+split-on-trailing-comma = true
+
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[dependency-groups]
+dev = [
+    "python-dotenv>=1.0.1",
+]
+
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "double"
+inline-quotes = "double"
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

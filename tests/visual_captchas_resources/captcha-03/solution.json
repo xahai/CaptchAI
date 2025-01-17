@@ -1,0 +1,8 @@
+{
+    "matrix": [false, true, false, true, true, true, true, false, false],
+    "query": "curtain",
+    "groq_match": false,
+    "moondream_match": false,
+    "groq_multi_shoot_match": true,
+    "moondream_multi_shoot_match": true
+}

@@ -1,0 +1,8 @@
+{
+    "matrix": [false, false, false, true, true, true, true, true, false],
+    "query": "bed",
+    "groq_match": true,
+    "groq_multi_shoot_match": true,
+    "moondream_match": false,
+    "moondream_multi_shoot_match": true
+}

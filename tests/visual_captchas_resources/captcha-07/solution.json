@@ -1,0 +1,8 @@
+{
+    "matrix": [true, true, true, false, true, false, false, true, false],
+    "query": "chair",
+    "groq_match": true,
+    "groq_multi_shoot_match": true,
+    "moondream_match": true,
+    "moondream_multi_shoot_match": true
+}
