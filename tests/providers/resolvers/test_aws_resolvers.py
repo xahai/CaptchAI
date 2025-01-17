@@ -100,6 +100,7 @@ def test_config():
 def test_aws_groq_audio_resolver(
     test_config, audio_data: str, expected_solution: list[str]
 ):
+    sleep(15)
     resolver = AWSAudioResolverGroqBackend(test_config)
     result = resolver.solve(audio_data)
 
@@ -153,6 +154,7 @@ def test_aws_image_groq_resolver(
     expected_query: str,
     groq_match: bool,
 ):
+    sleep(15)
     resolver = AWSImageResolverOneShootGroqBackend(test_config)
     result = resolver.solve(image_data, query=expected_query)
 
@@ -174,6 +176,7 @@ def test_aws_moondream_image_resolver(
     expected_query: str,
     moondream_match: bool,
 ):
+    sleep(15)
     resolver = AWSImageResolverOneShootMoonDreamBackend(test_config)
     result = resolver.solve(image_data, query=expected_query)
 
@@ -194,7 +197,7 @@ def test_aws_moondream_multi_shoot_image_resolver(
     expected_query: str,
     moondream_multi_shoot_match: bool,
 ):
-    sleep(5)
+    sleep(15)
     resolver = AWSImageResolverMultiShootMoonDreamBackend(test_config)
     result = resolver.solve(image_data, query=expected_query)
 
@@ -215,7 +218,7 @@ def test_aws_groq_multi_shoot_image_resolver(
     expected_query: str,
     groq_multi_shoot_match: bool,
 ):
-    sleep(10)
+    sleep(15)
     resolver = AWSImageResolverMultiShootGroqBackend(test_config)
     result = resolver.solve(image_data, query=expected_query)
 
