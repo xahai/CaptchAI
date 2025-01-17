@@ -31,6 +31,7 @@ authors = [
 test = [
     "pytest>=8.3.4",
     "python-dotenv>=1.0.1",
+    "ruff>=0.3.0",
 ]
 
 
