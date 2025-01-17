@@ -68,9 +68,9 @@ def test_middle_point():
 def test_is_point_inside(quadrant_params, test_points):
     quadrant = GridQuadrant(**quadrant_params)
     for point, expected in test_points:
-        assert (
-            quadrant.is_point_inside(point[0], point[1]) == expected
-        ), f"Failed for point {point} in quadrant with params {quadrant_params}"
+        assert quadrant.is_point_inside(point[0], point[1]) == expected, (
+            f"Failed for point {point} in quadrant with params {quadrant_params}"
+        )
 
 
 def test_boundary_points():

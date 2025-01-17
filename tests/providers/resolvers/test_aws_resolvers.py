@@ -103,9 +103,9 @@ def test_aws_groq_audio_resolver(
     resolver = AWSAudioResolverGroqBackend(test_config)
     result = resolver.solve(audio_data)
 
-    assert (
-        result.response == expected_solution
-    ), f"Expected {expected_solution}, but got {result.response}"
+    assert result.response == expected_solution, (
+        f"Expected {expected_solution}, but got {result.response}"
+    )
 
 
 def test_aws_audio_groq_resolver_with_convertion(test_config):
@@ -122,9 +122,9 @@ def test_aws_audio_groq_resolver_with_convertion(test_config):
     resolver = AWSAudioResolverGroqBackend(test_config)
     result = resolver.solve(audio_data)
 
-    assert (
-        result.response == expected_solution["words"]
-    ), f"Expected {expected_solution}, but got {result.response}"
+    assert result.response == expected_solution["words"], (
+        f"Expected {expected_solution}, but got {result.response}"
+    )
 
 
 def test_aws_audio_groq_resolver_with_convertion_error(test_config):
@@ -158,9 +158,9 @@ def test_aws_image_groq_resolver(
 
     evaluation_groq = result.response == expected_solution
 
-    assert (
-        result.response == expected_solution or evaluation_groq == groq_match
-    ), f"Expected {expected_solution}, but got {result.response}"
+    assert result.response == expected_solution or evaluation_groq == groq_match, (
+        f"Expected {expected_solution}, but got {result.response}"
+    )
 
 
 @pytest.mark.parametrize(
