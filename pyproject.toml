@@ -1,6 +1,6 @@
 [project]
 name = "captchai"
-version = "0.0.0"
+version = "0.0.1"
 license = { file = "LICENSE" }
 readme = "README.md"
 description = "Captchai is a python library for solving captchas using AI"
