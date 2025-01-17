@@ -48,7 +48,7 @@ jobs:
         # Check code formatting
         uv run ruff format . --check
         # Run all ruff rules (includes type checking, imports, etc.)
-        uv run ruff check . --select ALL
+        uv run ruff check .
         
     - name: Test with pytest
       run: |
