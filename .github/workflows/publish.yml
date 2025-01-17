@@ -15,6 +15,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      MOONDREAM_API_KEY: ${{ secrets.MOONDREAM_API_KEY }}
     permissions:
       contents: write
       id-token: write
@@ -66,6 +69,10 @@ jobs:
           # Bump version using bump-my-version with explicit flags
           uv run bump-my-version bump ${{ github.event.inputs.release_type }} --commit --tag
           
+          # Push the version bump commit and tag to main
+          git push origin HEAD:main
+          git push --tags
+          
           # Get the new version for later use
           new_version=$(grep '^version = ' pyproject.toml | cut -d'"' -f2)
           echo "new_version=$new_version" >> $GITHUB_OUTPUT
@@ -86,6 +93,3 @@ jobs:
           draft: false
           prerelease: false
           generate_release_notes: true
-
-      - name: Prune UV cache for CI
-        run: uv cache prune --ci

@@ -55,9 +55,6 @@ jobs:
         # Run all ruff rules (includes type checking, imports, etc.)
         uv run ruff check .
         
-    - name: Test with pytest
+    - name: Run tests
       run: |
-        uv run pytest tests/
-
-    - name: Prune UV cache for CI
-      run: uv cache prune --ci
+        uv run pytest
