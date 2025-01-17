@@ -26,6 +26,8 @@ authors = [
     { name = "Alejandro Jaramillo TBLabs", email = "alejandro.jaramillo@tblabs.co" },
 ]
 
+[project.metadata]
+version = "2.4"
 
 [project.optional-dependencies]
 test = [
