@@ -48,11 +48,11 @@ jobs:
         # Install all dependencies including dev extras
         uv sync --all-extras --dev
 
-    - name: Check code quality with ruff
+    - name: Check code quality
       run: |
-        # Check code formatting
+        # Check code formatting and run all ruff rules
+        # Both commands will fail if any issues are found
         uv run ruff format . --check
-        # Run all ruff rules (includes type checking, imports, etc.)
         uv run ruff check .
         
     - name: Run tests
