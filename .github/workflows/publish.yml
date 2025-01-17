@@ -1,18 +1,91 @@
-name: Test and Publish
+name: Publish to PyPI
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type (patch/minor/major)'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 jobs:
-  test:
+  publish:
     runs-on: ubuntu-latest
-    
-    env:
-      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-      MOONDREAM_API_KEY: ${{ secrets.MOONDREAM_API_KEY }}
+    permissions:
+      contents: write
+      id-token: write
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install UV
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Cache UV packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/uv
+            .venv
+          key: ${{ runner.os }}-uv-${{ hashFiles('**/pyproject.toml', '**/uv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-uv-
+
+      - name: Install dependencies
+        run: |
+          # Install all dependencies including dev extras
+          uv sync --all-extras --dev
+
+      - name: Verify build
+        run: |
+          # Build the package to verify it works
+          uv build
+          # Test that the package can be installed
+          uv run --with . --no-project --refresh-package captchai -- python -c "import captchai"
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+      - name: Bump version
+        id: bump_version
+        run: |
+          # Bump version using bump-my-version with explicit flags
+          uv run bump-my-version bump ${{ github.event.inputs.release_type }} --commit --tag
+          
+          # Get the new version for later use
+          new_version=$(grep '^version = ' pyproject.toml | cut -d'"' -f2)
+          echo "new_version=$new_version" >> $GITHUB_OUTPUT
+
+      - name: Build and publish to PyPI
+        env:
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          # Build and publish using UV's native commands
+          uv build
+          uv publish --token $PYPI_TOKEN
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.bump_version.outputs.new_version }}
+          name: Release v${{ steps.bump_version.outputs.new_version }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+
+      - name: Prune UV cache for CI
+        run: uv cache prune --ci

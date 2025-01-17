@@ -1,6 +1,6 @@
 from captchai.core.models.config import AvailableResolvers
 from captchai.core.models.config import CaptchaGlobalConfig
-from captchai.core.provider.aws.provider import AWSProviderCaptcha
+from captchai.core.provider.aws.providers import AWSProviderCaptcha
 
 
 class CaptchaSolver:

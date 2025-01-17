@@ -9,8 +9,8 @@ import pytest
 
 from dotenv import load_dotenv
 
-from captchai.core import AWSProviderConfig
-from captchai.core import CaptchaGlobalConfig
+from captchai.core.models.config import AWSProviderConfig
+from captchai.core.models.config import CaptchaGlobalConfig
 from captchai.core.provider.aws.resolvers import AudioTranscriptionError
 from captchai.core.provider.aws.resolvers import AWSAudioResolverGroqBackend
 from captchai.core.provider.aws.resolvers import AWSImageResolverMultiShootGroqBackend

@@ -3,11 +3,11 @@ from unittest.mock import patch
 
 import pytest
 
-from captchai.core import RESOLVERS
-from captchai.core import AvailableResolvers
-from captchai.core import AWSProviderCaptcha
-from captchai.core import AWSProviderConfig
-from captchai.core import CaptchaGlobalConfig
+from captchai.core.provider.aws.providers import RESOLVERS
+from captchai.core.provider.aws.providers import AvailableResolvers
+from captchai.core.provider.aws.providers import AWSProviderCaptcha
+from captchai.core.models.config import AWSProviderConfig
+from captchai.core.models.config import CaptchaGlobalConfig
 
 
 @pytest.fixture
