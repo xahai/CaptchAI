@@ -8,6 +8,7 @@ search = "{current_version}"
 replace = "{new_version}"
 regex = false
 ignore_missing_version = false
+tag = true
 tag_name = "v{new_version}"
 tag_message = "Release version {new_version}"
 commit = true
