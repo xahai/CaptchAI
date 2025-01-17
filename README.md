@@ -1,3 +1,5 @@
+![CaptchAI.jpg](CaptchAI.jpg)
+
 # 🤖 CaptchAI
 
 <div align="center">
@@ -13,6 +15,7 @@
 
 *A joint development effort by [LaProp](https://laprop.co) and [XAhai](https://xahai.co)*
 
+
 > ⚠️ **Alpha Status Notice**: This library is currently in alpha stage. Many features are still under development, 
 > requiring thorough testing and integration. Expect frequent updates and potential breaking changes.
 > We welcome feedback and contributions to help improve stability and functionality!
@@ -25,6 +28,12 @@
 [Contributing](#-contributing)
 
 </div>
+
+## ⚡ Install
+
+```bash
+pip install captchai
+```
 
 ## 🌟 Features
 
