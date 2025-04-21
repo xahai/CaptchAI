@@ -1,6 +1,13 @@
+from typing import TypeVar
+from typing import Union
+
 from captchai.core.models.config import AvailableResolvers
 from captchai.core.models.config import CaptchaGlobalConfig
+from captchai.core.models.config import CaptchaResponse
 from captchai.core.provider.aws.providers import AWSProviderCaptcha
+
+
+T = TypeVar("T", bound=Union[list[bool], str])
 
 
 class CaptchaSolver:
@@ -10,11 +17,9 @@ class CaptchaSolver:
     def _create_aws_provider(
         self, config: CaptchaGlobalConfig, resolver: AvailableResolvers
     ):
-        return AWSProviderCaptcha(
-            config, self.config.aws_provider_config.default_image_resolver
-        )
+        return AWSProviderCaptcha(config, resolver)
 
-    def solve_aws_captcha_image(self, data: str, query: str):
+    def solve_aws_captcha_image(self, data: str, query: str) -> CaptchaResponse[T]:
         """Solve an AWS image captcha.
 
         Args:
@@ -29,7 +34,7 @@ class CaptchaSolver:
         )
         return resolver.solve(data, query=query)
 
-    def solve_aws_captcha_audio(self, data: str):
+    def solve_aws_captcha_audio(self, data: str) -> CaptchaResponse[T]:
         """Solve an AWS audio captcha.
 
         Args:

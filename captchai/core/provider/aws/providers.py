@@ -1,5 +1,9 @@
+from typing import Generic
+from typing import TypeVar
+
 from captchai.core.models.config import AvailableResolvers
 from captchai.core.models.config import CaptchaGlobalConfig
+from captchai.core.models.config import CaptchaResponse
 from captchai.core.provider.aws.resolvers import AWSAudioResolverGroqBackend
 from captchai.core.provider.aws.resolvers import AWSImageResolverMultiShootGroqBackend
 from captchai.core.provider.aws.resolvers import (
@@ -10,6 +14,8 @@ from captchai.core.provider.aws.resolvers import (
     AWSImageResolverOneShootMoonDreamBackend,
 )
 
+
+T = TypeVar("T")
 
 RESOLVERS = {
     AvailableResolvers.GROQ_AUDIO: AWSAudioResolverGroqBackend,
@@ -24,7 +30,7 @@ RESOLVERS = {
 }
 
 
-class AWSProviderCaptcha:
+class AWSProviderCaptcha(Generic[T]):
     def _initialize_type(
         self, config: CaptchaGlobalConfig, resolver: AvailableResolvers
     ):
@@ -34,6 +40,6 @@ class AWSProviderCaptcha:
         self._config = config
         self._resolver = resolver
 
-    def solve(self, data: str, query: str = ""):
+    def solve(self, data: str, query: str = "") -> CaptchaResponse[T]:
         resolver = self._initialize_type(self._config, self._resolver)
         return resolver.solve(data, query=query)

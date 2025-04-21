@@ -113,10 +113,6 @@ class AWSAudioResolverGroqBackend(AbstractResolver):
 
         Returns:
             A tuple of (filename, audio_data) ready for the Groq API
-
-        Note:
-            The method handles both conversion to FLAC if needed and proper file
-            format detection
         """
         audio_buffer = io.BytesIO(audio_data)
 
@@ -232,7 +228,7 @@ class AWSImageResolverOneShootMoonDreamBackend(AbstractResolver):
         solution = self._compute_solution_flatten_list(quadrants_of_objects)
         return solution
 
-    def solve(self, data: str, **kwargs):
+    def solve(self, data: str, **kwargs) -> CaptchaResponse[list[bool]]:
         if "query" not in kwargs:
             raise ValueError("'query' parameter is required in kwargs")
 
@@ -249,7 +245,7 @@ class AWSImageResolverMultiShootMoonDreamBackend(AbstractResolver):
         self.image_size = config.aws_provider_config.image_size
         self.model = md.vl(api_key=config.moondream_api_key)
 
-    def solve(self, data: str, **kwargs):
+    def solve(self, data: str, **kwargs) -> CaptchaResponse[list[bool]]:
         if "query" not in kwargs:
             raise ValueError("'query' parameter is required in kwargs")
 
@@ -325,9 +321,6 @@ class AWSImageResolverMultiShootGroqBackend(AbstractResolver):
         solution = []
         split_image = self._split_image(loaded_image)
         for idx, image in enumerate(split_image):
-            # Save each split image for debugging
-            # image.save(os.path.join(debug_dir, f"split_image_{idx}.png"))
-
             buffer = io.BytesIO()
             image.convert("RGB").save(buffer, format="JPEG")
             data = base64.b64encode(buffer.getvalue()).decode("utf-8")
@@ -357,7 +350,7 @@ class AWSImageResolverMultiShootGroqBackend(AbstractResolver):
                 solution.append(False)
         return solution
 
-    def solve(self, data: str, **kwargs):
+    def solve(self, data: str, **kwargs) -> CaptchaResponse[list[bool]]:
         if "query" not in kwargs:
             raise ValueError("'query' parameter is required in kwargs")
 
