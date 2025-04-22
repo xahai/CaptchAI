@@ -21,6 +21,7 @@ classifiers = [
 dependencies = [
     "groq>=0.15.0",
     "moondream>=0.0.6",
+    "numpy>=2.2.1",
     "pydantic>=2.10.5",
     "pydub>=0.25.1",
 ]
