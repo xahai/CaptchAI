@@ -142,7 +142,7 @@ def test_aws_audio_groq_resolver_with_convertion_error(test_config):
     ):
         resolver.solve(audio_data)
 
-
+@pytest.mark.skip(reason="Test skipped because llama 3 vision model got deprecated")
 @pytest.mark.parametrize(
     "image_data,expected_solution,expected_query,groq_match",
     load_image_test_cases("groq_match"),
@@ -206,7 +206,7 @@ def test_aws_moondream_multi_shoot_image_resolver(
         or result.response == moondream_multi_shoot_match
     ), f"Expected {expected_solution}, but got {result.response}"
 
-
+@pytest.mark.skip(reason="Test skipped because llama 3 vision model got deprecated")
 @pytest.mark.parametrize(
     "image_data,expected_solution,expected_query,groq_multi_shoot_match",
     load_image_test_cases("groq_multi_shoot_match"),

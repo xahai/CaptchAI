@@ -59,6 +59,7 @@ source = { editable = "." }
 dependencies = [
     { name = "groq" },
     { name = "moondream" },
+    { name = "numpy" },
     { name = "pydantic" },
     { name = "pydub" },
 ]
@@ -81,6 +82,7 @@ requires-dist = [
     { name = "bump-my-version", marker = "extra == 'test'", specifier = ">=0.15.4" },
     { name = "groq", specifier = ">=0.15.0" },
     { name = "moondream", specifier = ">=0.0.6" },
+    { name = "numpy", specifier = ">=2.2.1" },
     { name = "pydantic", specifier = ">=2.10.5" },
     { name = "pydub", specifier = ">=0.25.1" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=8.3.4" },
